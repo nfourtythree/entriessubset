@@ -1,4 +1,4 @@
-![Plugin Icon](resources/img/icon.png);
+![Plugin Icon](resources/img/icon.png)
 
 # Entries Subset plugin for Craft CMS 3.x
 
