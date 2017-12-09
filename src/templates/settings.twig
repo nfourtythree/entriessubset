@@ -1,0 +1,37 @@
+{#
+/**
+ * Entries Subset plugin for Craft CMS
+ *
+ * EntriesSubsetFieldType HTML
+ *
+ * @author    nfourtythree
+ * @copyright Copyright (c) 2017 Nathaniel Hammond (nfourtythree)
+ * @link      http://n43.me
+ * @package   EntriesSubset
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% for sectionHandle,entryTypes in entryTypesBySection %}
+  {% set class = 'all' %}
+  {% set label = 'Entry Types'|t %}
+  {% set instructions = 'From below select the entry types by which you wish to restrict entry selection'|t %}
+  {% if not loop.first %}
+    {% set section = craft.app.sections.getSectionByHandle( sectionHandle ) %}
+    {% set label = section ? section.name : label %}
+    {% set instructions = null %}
+    {% set class = ( section is defined ) ? 'section section-' ~ section.id ~ (( section.type == 'single' ) ? ' singles' : '')  : '' %}
+  {% endif %}
+  {{ forms.checkboxSelectField({
+    label: label,
+    instructions: instructions,
+    id: 'entryTypes' ~ ( not loop.first ) ? sectionHandle : '',
+    name: 'entryTypes',
+    options: entryTypes,
+    values: settings.entryTypes,
+    class: class
+  })}}
+
+{% endfor %}
