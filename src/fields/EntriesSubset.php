@@ -37,7 +37,7 @@ class EntriesSubsetField extends BaseRelationField
 {
     // Public Properties
     // =========================================================================
-    
+
     // Storage for allowable entry types
     public $entryTypes;
 
@@ -87,9 +87,9 @@ class EntriesSubsetField extends BaseRelationField
     public function getSettingsHtml()
     {
       Craft::$app->getView()->registerAssetBundle( EntriesSubsetFieldAsset::class );
-      
+
       Craft::$app->getView()->registerJs( "$.fn['EntriesSubset']();" );
-      
+
       $parentHtml = parent::getSettingsHtml();
 
       return $parentHtml . Craft::$app->getView()->renderTemplate( 'entriessubset/settings', [
@@ -97,28 +97,32 @@ class EntriesSubsetField extends BaseRelationField
             'entryTypesBySection' => EntriesSubset::getInstance()->service->getEntryTypeOptions(),
             'type' => $this->displayName(),
         ] );
-        
-        
+
+
     }
-    
+
     /**
      * @inheritdoc
      */
     protected function inputTemplateVariables( $value = null, ElementInterface $element = null ): array
     {
       $vars = parent::inputTemplateVariables( $value, $element );
-      
+
       $settings = $this->getSettings();
-      
-      
+
+
       if ( isset( $settings[ 'entryTypes' ] ) ) {
         $entryTypes = $settings[ 'entryTypes' ];
-        
+
         if ($entryTypes and is_array( $entryTypes ) and !empty( $entryTypes ) ) {
           foreach( $entryTypes as $typeId ) {
             if ( is_numeric( $typeId ) ) {
               $entryType = Craft::$app->sections->getEntryTypeById( $typeId );
-              $vars[ 'criteria' ][ 'type' ][] = $entryType->handle;
+
+              // Make sure there is a valid entry type
+              if ( $entryType !== null ) {
+                $vars[ 'criteria' ][ 'type' ][] = $entryType->handle;
+              }
             }
           }
         }
