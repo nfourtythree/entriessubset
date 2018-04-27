@@ -2,7 +2,7 @@
 
 # Entries Subset plugin for Craft CMS 3.x
 
-Craft field type plugin that extends the core Entries field type to give extra settings with ability to restrict by entry type
+Craft field type plugin that extends the core Entries field type to give extra settings with ability to restrict by entry type, author or author's user group.
 
 ![Settings Screenshot](resources/img/settings.png)
 
@@ -26,9 +26,12 @@ To install the plugin, follow these instructions.
 
 ## Entries Subset Overview
 
-This field type is an extension of the built in `Entries` field type. It allows you to specify extra criteria (currently only `EntryType`) in which to restrict the available entries for selection.
+This field type is an extension of the built in `Entries` field type. It allows you to specify extra criteria (`EntryType`, `User`, `UserGroup`) in which to restrict the available entries for selection.
 
-As an example you might have a News section which has a few entry types. One of the entry types is "Press Release", you may then have a block where you would like the user to be able to select a "Featured" press release. With the standard `Entries` field type they would be able to select anything from the News section, with this plugin you are able to only allow the selection of those with the "Press Release" entry type.
+#### Examples
+You might have a News section which has a few entry types. One of the entry types is "Press Release", you may then have a block where you would like the user to be able to select a "Featured" press release. With the standard `Entries` field type they would be able to select anything from the News section, with this plugin you are able to only allow the selection of those with the "Press Release" entry type.
+
+You might want to limit selection of entries only authored by users in the "Development" or "Copywriters" user groups, this is now possible.
 
 ## Using Entries Subset
 
@@ -39,7 +42,6 @@ When creating a new field the extra options for `EntryType` will appear when sel
 Some things to do, and ideas for potential features:
 
 * Tidy all the things
-* Restrict by **AUTHORS**
 * Make it more obvious what the criteria is when selecting entries in the ElementSelectorModal
 
 Brought to you by [Nathaniel Hammond (nfourtythree)](http://n43.me)
