@@ -16,7 +16,7 @@
         defaults = {
           selector:'#types-nfourtythree-entriessubset-fields-EntriesSubsetField'
         };
-        
+
     // Plugin constructor
     function Plugin( element, options ) {
         this.element = element;
@@ -35,32 +35,31 @@
 
             $(function () {
               _this.enableEntryTypes();
-              
+
               $( _this._defaults.selector + '-sources-field input[type="checkbox"]' ).on( 'change', function() {
                 _this.enableEntryTypes();
               } );
-              
+
             });
         },
-        
+
         enableEntryTypes: function() {
           var _this = this;
-          
+
           // Loop through sources
 
           $( '#nfourtythree-entriessubset-fields-EntriesSubsetField .checkbox-select[class*="section"] input[type="checkbox"]' ).attr( 'disabled', 'disabled' );
 
           $( _this._defaults.selector + '-sources-field input[type="checkbox"]' ).each( function() {
             if ( !$( this ).prop( 'disabled' ) && $( this ).prop( 'checked' ) ) {
-              console.log( $( this ).val() );
               _this.enableEntryType( $( this ).val() );
             }
           } );
         },
-        
+
         enableEntryType: function( val ) {
           var _this = this;
-          
+
           if ( val === '*' ) {
             $( '#nfourtythree-entriessubset-fields-EntriesSubsetField .checkbox-select[class*="section"] input[type="checkbox"]' ).removeAttr( 'disabled' );
           } else if ( val === 'singles' ) {
