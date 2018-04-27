@@ -14,6 +14,7 @@
 
 {% import "_includes/forms" as forms %}
 
+{# Entry Types #}
 {% for sectionHandle,entryTypes in entryTypesBySection %}
   {% set class = 'all' %}
   {% set label = 'Entry Types'|t %}
@@ -35,3 +36,37 @@
   })}}
 
 {% endfor %}
+
+{# Authors #}
+{% if users is defined and users|length %}
+  <hr>
+  {% set class = 'all' %}
+  {% set label = 'Authors'|t %}
+  {% set instructions = 'Selecting authors from the list below to restrict entry selection to entries authored only by those users.'|t %}
+  {{ forms.checkboxSelectField({
+    label: label,
+    instructions: instructions,
+    id: 'users',
+    name: 'users',
+    options: users,
+    values: settings.users ?? [],
+    class: class
+  }) }}
+{% endif %}
+
+{# Author Groups #}
+{% if userGroups is defined and userGroups|length %}
+  <hr>
+  {% set class = 'all' %}
+  {% set label = 'Author Groups'|t %}
+  {% set instructions = 'Selecting user groups below will restrict the entry selection to entries with authors in the selected groups only'|t %}
+  {{ forms.checkboxSelectField({
+    label: label,
+    instructions: instructions,
+    id: 'userGroups',
+    name: 'userGroups',
+    options: userGroups,
+    values: settings.userGroups ?? [],
+    class: class
+  }) }}
+{% endif %}

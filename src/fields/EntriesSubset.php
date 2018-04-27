@@ -40,6 +40,8 @@ class EntriesSubsetField extends BaseRelationField
 
     // Storage for allowable entry types
     public $entryTypes;
+    public $userGroups;
+    public $users;
 
     // Static Methods
     // =========================================================================
@@ -77,6 +79,8 @@ class EntriesSubsetField extends BaseRelationField
     {
         $attributes = parent::settingsAttributes();
         $attributes[] = 'entryTypes';
+        $attributes[] = 'userGroups';
+        $attributes[] = 'users';
 
         return $attributes;
     }
@@ -92,9 +96,13 @@ class EntriesSubsetField extends BaseRelationField
 
       $parentHtml = parent::getSettingsHtml();
 
+      $plugin = EntriesSubset::getInstance();
+
       return $parentHtml . Craft::$app->getView()->renderTemplate( 'entriessubset/settings', [
             'settings' => $this->getSettings(),
-            'entryTypesBySection' => EntriesSubset::getInstance()->service->getEntryTypeOptions(),
+            'entryTypesBySection' => $plugin->service->getEntryTypeOptions(),
+            'userGroups' => $plugin->service->getUserGroups(),
+            'users' => $plugin->service->getUsers(),
             'type' => $this->displayName(),
         ] );
 
@@ -110,7 +118,6 @@ class EntriesSubsetField extends BaseRelationField
 
       $settings = $this->getSettings();
 
-
       if ( isset( $settings[ 'entryTypes' ] ) ) {
         $entryTypes = $settings[ 'entryTypes' ];
 
@@ -125,6 +132,20 @@ class EntriesSubsetField extends BaseRelationField
               }
             }
           }
+        }
+      }
+
+      if ( isset( $settings[ 'users' ] ) and count( $settings[ 'users' ] ) ) {
+        foreach ( $settings[ 'users' ] as $userId ) {
+          if ( is_numeric( $userId ) ) {
+            $vars[ 'criteria' ][ 'authorId' ][] = $userId;
+          }
+        }
+      }
+
+      if ( isset( $settings[ 'userGroups' ] ) and count( $settings[ 'userGroups' ] ) ) {
+        foreach ( $settings[ 'userGroups' ] as $userGroupId ) {
+          $vars[ 'criteria' ][ 'authorGroupId' ][] = $userGroupId;
         }
       }
 

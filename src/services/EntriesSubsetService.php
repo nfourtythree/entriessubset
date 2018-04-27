@@ -10,8 +10,11 @@
 namespace nfourtythree\entriessubset\services;
 
 use Craft;
+
 use craft\base\Component;
 use craft\services\Sections;
+use craft\helpers\ArrayHelper;
+use craft\elements\User;
 
 /**
  * Entries Subset Service
@@ -56,4 +59,40 @@ class EntriesSubsetService extends Component
     return $entryTypeOptions;
   }
 
+  /**
+   * Get user groups
+   * @return {array} an array of user groups keyed by the handle
+   */
+  public function getUserGroups()
+  {
+    $userGroups = [];
+    $allUserGroups = Craft::$app->userGroups->getAllGroups();
+
+    if ( count( $allUserGroups ) ) {
+      $userGroups = ArrayHelper::map( $allUserGroups, 'id', 'name' );
+    }
+
+    return $userGroups;
+  }
+
+  /**
+   * Get Users
+   * @return {array} Array of users keyed by their ID
+   */
+  public function getUsers()
+  {
+    $users = [];
+    $allUsers = User::find()
+        ->all();
+
+    if ( count( $allUsers ) ) {
+      $users = ArrayHelper::index( $allUsers, 'id' );
+
+      foreach ( $users as $id => $user ) {
+        $users[ $id ] = implode( ' - ', array_filter( [ $user->fullName, ( $user->email != $user->username ) ? $user->username : '', $user->email ] ) );
+      }
+    }
+
+    return $users;
+  }
 }
