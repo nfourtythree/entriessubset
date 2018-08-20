@@ -15,6 +15,7 @@ use craft\base\Component;
 use craft\services\Sections;
 use craft\helpers\ArrayHelper;
 use craft\elements\User;
+use \craft\elements\Category;
 
 /**
  * Entries Subset Service
@@ -94,5 +95,26 @@ class EntriesSubsetService extends Component
     }
 
     return $users;
+  }
+
+  /**
+   * Get Categories
+   * @return {array} Array of categories keyed by their ID
+   */
+  public function getCategories()
+  {
+    $categories = [];
+    $allCategories = Category::find()
+        ->all();
+
+    if ( count( $allCategories ) ) {
+      $categories = ArrayHelper::index( $allCategories, 'id' );
+
+      foreach ( $categories as $id => $category ) {
+        $categories[ $id ] = implode( ' - ', array_filter( [ $category->title ] ) );
+      }
+    }
+
+    return $categories;
   }
 }

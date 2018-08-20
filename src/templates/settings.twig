@@ -66,7 +66,23 @@
     id: 'userGroups',
     name: 'userGroups',
     options: userGroups,
-    values: settings.userGroups ?? [],
+    values: settings.categories ?? [],
+    class: class
+  }) }}
+{% endif %}
+
+{% if craft.categories().exists() %}
+  <hr>
+  {% set class = 'all' %}
+  {% set label = 'Categories'|t %}
+  {% set instructions = 'Selecting categories from the list below will restrict entry selection to entries related only to those categories.'|t %}
+  {{ forms.checkboxSelectField({
+    label: label,
+    instructions: instructions,
+    id: 'categories',
+    name: 'categories',
+    options: categories,
+    values: settings.categories ?? [],
     class: class
   }) }}
 {% endif %}
