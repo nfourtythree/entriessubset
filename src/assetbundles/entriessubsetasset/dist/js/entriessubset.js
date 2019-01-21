@@ -47,7 +47,6 @@
           var _this = this;
 
           // Loop through sources
-
           $( '#nfourtythree-entriessubset-fields-EntriesSubsetField .checkbox-select[class*="section"] input[type="checkbox"]' ).attr( 'disabled', 'disabled' );
 
           $( _this._defaults.selector + '-sources-field input[type="checkbox"]' ).each( function() {
@@ -67,7 +66,21 @@
           } else {
             var section = val.split( ':' );
             if ( section.length == 2 ) {
-              $( '#nfourtythree-entriessubset-fields-EntriesSubsetField .checkbox-select[class*="section-' + section[1] + '"] input[type="checkbox"]' ).removeAttr( 'disabled' );
+              var _sectionSelector = section[1];
+
+              // For Craft 3.1 to selector the correct items to turn on and off
+              if (Craft && Craft.publishableSections && Craft.publishableSections.length) {
+                for (var i = 0; i < Craft.publishableSections.length; i++) {
+                  var _tmp = Craft.publishableSections[i];
+                  if (_tmp.uid && _tmp.uid == section[1]) {
+                    _sectionSelector = _tmp.id;
+                    break;
+                  }
+                }
+              }
+
+              var _selectorString = '#nfourtythree-entriessubset-fields-EntriesSubsetField .checkbox-select[class*="section-' + _sectionSelector + '"] input[type="checkbox"]';
+              $( _selectorString ).removeAttr( 'disabled' );
             }
           }
         }
