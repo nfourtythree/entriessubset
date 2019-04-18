@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.2.1 - 2019-04-18
+### Fixed
+- Updated field to extend Entries class fixes #9 h/t @tinchalamo
+- Added support for Reverse Related Entries plugin
+
 ## 1.2.0 - 2019-01-31
 ### Fixed
 - Fixed support for Craft CMS 3.1
