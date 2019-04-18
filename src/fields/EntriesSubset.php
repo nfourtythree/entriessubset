@@ -19,6 +19,7 @@ use craft\base\ElementInterface;
 use craft\elements\Entry;
 use craft\fields\BaseRelationField;
 use craft\helpers\Json;
+use craft\fields\Entries;
 
 /**
  *  Field
@@ -33,7 +34,7 @@ use craft\helpers\Json;
  * @package   EntriesSubset
  * @since     1.0.0
  */
-class EntriesSubsetField extends BaseRelationField
+class EntriesSubsetField extends Entries
 {
     // Public Properties
     // =========================================================================
