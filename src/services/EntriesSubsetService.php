@@ -53,7 +53,7 @@ class EntriesSubsetService extends Component
       if ( !isset( $entryTypeOptions[ $type->section->handle ] ) ) {
         $entryTypeOptions[ $type->section->handle ] = [];
       }
-      $entryTypeOptions[ $type->section->handle ][] = [ 'label' => $type->name, 'value' => $type->id ];
+      $entryTypeOptions[ $type->section->handle ][] = [ 'label' => $type->name, 'value' => $type->uid ];
     }
 
     return $entryTypeOptions;

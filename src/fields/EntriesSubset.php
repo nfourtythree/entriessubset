@@ -16,8 +16,10 @@ use nfourtythree\entriessubset\services\EntriesSubsetService;
 
 use Craft;
 use craft\base\ElementInterface;
+use craft\db\Table;
 use craft\elements\Entry;
 use craft\fields\BaseRelationField;
+use craft\helpers\Db;
 use craft\helpers\Json;
 use craft\fields\Entries;
 
@@ -123,7 +125,9 @@ class EntriesSubsetField extends Entries
         $entryTypes = $settings[ 'entryTypes' ];
 
         if ($entryTypes and is_array( $entryTypes ) and !empty( $entryTypes ) ) {
-          foreach( $entryTypes as $typeId ) {
+          foreach( $entryTypes as $typeUid ) {
+            $typeId = Db::idByUid(Table::ENTRYTYPES, $typeUid);
+
             if ( is_numeric( $typeId ) ) {
               $entryType = Craft::$app->sections->getEntryTypeById( $typeId );
 
