@@ -42,7 +42,7 @@
     "extra": {
         "name": "Entries Subset",
         "handle": "entriessubset",
-        "schemaVersion": "1.1.0",
+        "schemaVersion": "1.1.1",
         "hasCpSettings": false,
         "hasCpSection": false,
         "changelogUrl": "https://raw.githubusercontent.com/nfourtythree/craft3-entriessubset/master/CHANGELOG.md",
