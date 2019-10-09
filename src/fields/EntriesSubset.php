@@ -45,6 +45,7 @@ class EntriesSubsetField extends Entries
     public $entryTypes;
     public $userGroups;
     public $users;
+    public $categories;
 
     // Static Methods
     // =========================================================================
@@ -84,6 +85,7 @@ class EntriesSubsetField extends Entries
         $attributes[] = 'entryTypes';
         $attributes[] = 'userGroups';
         $attributes[] = 'users';
+        $attributes[] = 'categories';
 
         return $attributes;
     }
@@ -106,6 +108,7 @@ class EntriesSubsetField extends Entries
             'entryTypesBySection' => $plugin->service->getEntryTypeOptions(),
             'userGroups' => $plugin->service->getUserGroups(),
             'users' => $plugin->service->getUsers(),
+            'categories' => $plugin->service->getCategories(),
             'type' => $this->displayName(),
         ] );
 
@@ -151,6 +154,12 @@ class EntriesSubsetField extends Entries
       if ( isset( $settings[ 'userGroups' ] ) and count( $settings[ 'userGroups' ] ) ) {
         foreach ( $settings[ 'userGroups' ] as $userGroupId ) {
           $vars[ 'criteria' ][ 'authorGroupId' ][] = $userGroupId;
+        }
+      }
+
+      if ( isset( $settings[ 'categories' ] ) and count( $settings[ 'categories' ] ) ) {
+        foreach ( $settings[ 'categories' ] as $categoryId ) {
+          $vars[ 'criteria' ][ 'relatedTo' ][] = $categoryId;
         }
       }
 
