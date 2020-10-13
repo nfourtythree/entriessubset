@@ -4,6 +4,8 @@
 
 Craft field type plugin that extends the core Entries field type to give extra settings with ability to restrict by entry type, author or author's user group.
 
+**NOTE**: Version 1.2 is only compatible with Craft CMS 3.1.2.2 ownwards, for pre 3.1 support please use v1.1
+
 ![Settings Screenshot](resources/img/settings.png)
 
 ## Requirements

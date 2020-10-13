@@ -82,6 +82,13 @@ class EntriesSubset extends Plugin
             }
         );
 
+        // Register CraftQL schema.
+        Event::on(
+            EntriesSubsetField::class,
+            'craftQlGetFieldSchema',
+            [utilities\CraftQLListener::class, 'onCraftQlGetFieldSchema']
+        );
+
         Craft::info(
             Craft::t(
                 'entriessubset',
