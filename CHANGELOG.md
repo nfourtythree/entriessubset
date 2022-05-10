@@ -12,7 +12,7 @@
 ## 1.2.3 - 2020-10-27
 
 ### Fixed
-- Fixed compatibility with Composer v2. ([#17](https://github.com/nfourtythree/craft3-entriessubset/issues/17))
+- Fixed compatibility with Composer v2. ([#17](https://github.com/nfourtythree/entriessubset/issues/17))
 
 ## 1.2.2 - 2019-09-06
 
