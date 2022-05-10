@@ -56,7 +56,7 @@ class m190906_102859_entry_type_id_to_uid extends Migration
                 $settings = [];
             }
 
-            if (array_key_exists('entryTypes', $settings)) {
+            if (array_key_exists('entryTypes', $settings) && is_array($settings['entryTypes'])) {
                 foreach ($settings['entryTypes'] as $key => $entryTypeId) {
                     $settings['entryTypes'][$key] = $entryTypes[$entryTypeId] ?? null;
                 }
