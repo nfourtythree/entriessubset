@@ -1,9 +1,18 @@
 # Entries Subset Changelog
 
+## 2.0.0 - 2022-05-10
+
+### Changed
+- Entries Subset now supports Craft CMS v4. ([#18](https://github.com/nfourtythree/entriessubset/issues/18))
+- Renamed plugin class `EntriesSubset` -> `Plugin`.
+
+### Removed
+- Removed CraftQL related code.
+
 ## 1.2.3 - 2020-10-27
 
 ### Fixed
-- Fixed compatibility with Composer v2. ([#17](https://github.com/nfourtythree/craft3-entriessubset/issues/17))
+- Fixed compatibility with Composer v2. ([#17](https://github.com/nfourtythree/entriessubset/issues/17))
 
 ## 1.2.2 - 2019-09-06
 

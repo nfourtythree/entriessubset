@@ -1,51 +1,67 @@
 {
-    "name": "nfourtythree/entriessubset",
-    "description": "Craft field type plugin that extends the core Entries field type to give extra settings with ability to restrict by entry type",
-    "type": "craft-plugin",
-    "version": "1.2.3",
-    "keywords": [
-        "craft",
-        "cms",
-        "craftcms",
-        "craft-plugin",
-        "entries subset",
-        "entriessubset",
-        "craft3",
-        "entry types",
-        "entrytype"
-    ],
-    "support": {
-        "docs": "https://github.com/nfourtythree/craft3-entriessubset/blob/master/README.md",
-        "issues": "https://github.com/nfourtythree/craft3-entriessubset/issues"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Nathaniel Hammond (nfourtythree)",
-            "homepage": "http://n43.me"
-        }
-    ],
-    "require": {
-        "craftcms/cms": "^3.1.2.2"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-          "nfourtythree\\entriessubset\\": "src/"
-        }
-    },
-    "extra": {
-        "name": "Entries Subset",
-        "handle": "entriessubset",
-        "schemaVersion": "1.1.1",
-        "hasCpSettings": false,
-        "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/nfourtythree/craft3-entriessubset/master/CHANGELOG.md",
-        "class": "nfourtythree\\entriessubset\\EntriesSubset"
+  "name": "nfourtythree/entriessubset",
+  "description": "Craft field type plugin that extends the core Entries field type to give extra settings with ability to restrict by entry type",
+  "type": "craft-plugin",
+  "keywords": [
+    "craft",
+    "cms",
+    "craftcms",
+    "craft-plugin",
+    "entries subset",
+    "entriessubset",
+    "craft3",
+    "entry types",
+    "entrytype"
+  ],
+  "support": {
+    "docs": "https://github.com/nfourtythree/entriessubset/blob/master/README.md",
+    "issues": "https://github.com/nfourtythree/entriessubset/issues"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nathaniel Hammond (nfourtythree)",
+      "homepage": "https://n43.me"
     }
+  ],
+  "require": {
+    "php": "^8.0.2",
+    "craftcms/cms": "^4.0.0"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "nfourtythree\\entriessubset\\": "src/"
+    }
+  },
+  "require-dev": {
+    "craftcms/phpstan": "dev-main",
+    "craftcms/ecs": "dev-main"
+  },
+  "extra": {
+    "name": "Entries Subset",
+    "handle": "entriessubset",
+    "documentationUrl": "https://raw.githubusercontent.com/nfourtythree/entriessubset/master/README.md"
+  },
+  "scripts": {
+    "phpstan": "phpstan --memory-limit=1G",
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --ansi --fix"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    },
+    "platform": {
+      "php": "8.0.2"
+    }
+  }
 }

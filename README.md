@@ -1,16 +1,16 @@
 ![Plugin Icon](resources/img/icon.png)
 
-# Entries Subset plugin for Craft CMS 3.x
+# Entries Subset plugin for Craft CMS 4.x
 
 Craft field type plugin that extends the core Entries field type to give extra settings with ability to restrict by entry type, author or author's user group.
 
-**NOTE**: Version 1.2 is only compatible with Craft CMS 3.1.2.2 ownwards, for pre 3.1 support please use v1.1
+**NOTE**: Craft CMS v4 introduced the condition builder which now allows for most of these features when creating a native Entries field.
 
 ![Settings Screenshot](resources/img/settings.png)
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0-RC1 or later.
+This plugin requires Craft CMS 4.0.0 or later.
 
 ## Installation
 
@@ -43,7 +43,6 @@ When creating a new field the extra options for `EntryType` will appear when sel
 
 Some things to do, and ideas for potential features:
 
-* Tidy all the things
-* Make it more obvious what the criteria is when selecting entries in the ElementSelectorModal
+* Sunset plugin when Craft CMS has all the features natively
 
-Brought to you by [Nathaniel Hammond (nfourtythree)](http://n43.me)
+Brought to you by [Nathaniel Hammond (nfourtythree)](https://n43.me)

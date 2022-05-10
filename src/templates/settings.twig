@@ -14,15 +14,29 @@
 
 {% import "_includes/forms" as forms %}
 
+<p class="notice has-icon">
+  <span class="icon" aria-hidden="true"></span><span class="visually-hidden">Tip: </span>
+  <span>
+    Craft CMS v4 introduced the {{ 'Selectable Entries Condition'|t('app') }} on Entries' field settings. This means most of the functionality of this custom field type can be done with the native field type.
+    <br>
+    <br>
+    It is recommended to migrate your field to the native field where possible to keep the best experience going forward.
+  </span>
+</p>
+
 {# Entry Types #}
 {% for sectionHandle,entryTypes in entryTypesBySection %}
   {% set class = 'all' %}
   {% set label = 'Entry Types'|t %}
   {% set instructions = 'From below select the entry types by which you wish to restrict entry selection'|t %}
+  {% set warning = 'Entries fields now support limiting entry selection by entry using the {field} above.'|t('entriessubset', {field: 'Selectable Entries Condition'|t('app')}) %}
+  {% set tip = '{field} only allows for limiting by a single entry type. This is changing in Craft CMS v4.1 which will allow multi-selection.'|t('entriessubset', {field: 'Selectable Entries Condition'|t('app')}) %}
   {% if not loop.first %}
     {% set section = craft.app.sections.getSectionByHandle( sectionHandle ) %}
     {% set label = section ? section.name : label %}
     {% set instructions = null %}
+    {% set warning = null %}
+    {% set tip = null %}
     {% set class = ( section is defined ) ? 'section section-' ~ section.id ~ (( section.type == 'single' ) ? ' singles' : '')  : '' %}
   {% endif %}
   {{ forms.checkboxSelectField({
@@ -32,7 +46,9 @@
     name: 'entryTypes',
     options: entryTypes,
     values: settings.entryTypes,
-    class: class
+    class: class,
+    warning: warning,
+    tip: tip,
   })}}
 
 {% endfor %}
@@ -50,7 +66,7 @@
     name: 'users',
     options: users,
     values: settings.users ?? [],
-    class: class
+    class: class,
   }) }}
 {% endif %}
 
@@ -67,6 +83,7 @@
     name: 'userGroups',
     options: userGroups,
     values: settings.userGroups ?? [],
-    class: class
+    class: class,
+    warning: 'Entries fields now supports limiting entry selection by user group using the {field} above.'|t('entriessubset', {field: 'Selectable Entries Condition'|t('app')})
   }) }}
 {% endif %}

@@ -10,18 +10,15 @@
 
 namespace nfourtythree\entriessubset\fields;
 
-use nfourtythree\entriessubset\EntriesSubset;
-use nfourtythree\entriessubset\assetbundles\entriessubsetasset\EntriesSubsetFieldAsset;
-use nfourtythree\entriessubset\services\EntriesSubsetService;
-
 use Craft;
 use craft\base\ElementInterface;
+
 use craft\db\Table;
 use craft\elements\Entry;
-use craft\fields\BaseRelationField;
-use craft\helpers\Db;
-use craft\helpers\Json;
 use craft\fields\Entries;
+use craft\helpers\Db;
+use nfourtythree\entriessubset\assetbundles\entriessubsetasset\EntriesSubsetFieldAsset;
+use nfourtythree\entriessubset\Plugin;
 
 /**
  *  Field
@@ -38,16 +35,20 @@ use craft\fields\Entries;
  */
 class EntriesSubsetField extends Entries
 {
-    // Public Properties
-    // =========================================================================
+    /**
+     * @var array|null
+     */
+    public ?array $entryTypes = null;
 
-    // Storage for allowable entry types
-    public $entryTypes;
-    public $userGroups;
-    public $users;
+    /**
+     * @var array|null
+     */
+    public ?array $userGroups = null;
 
-    // Static Methods
-    // =========================================================================
+    /**
+     * @var array|null
+     */
+    public ?array $users = null;
 
     /**
      * Returns the display name of this class.
@@ -62,17 +63,9 @@ class EntriesSubsetField extends Entries
     /**
      * @inheritdoc
      */
-    protected static function elementType(): string
+    public static function elementType(): string
     {
         return Entry::class;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function defaultSelectionLabel(): string
-    {
-        return Craft::t('app', 'Add an entry');
     }
 
     /**
@@ -90,70 +83,63 @@ class EntriesSubsetField extends Entries
 
     /**
      * @inheritdoc
+     * @throws \yii\base\InvalidConfigException
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
-      Craft::$app->getView()->registerAssetBundle( EntriesSubsetFieldAsset::class );
+        Craft::$app->getView()->registerAssetBundle(EntriesSubsetFieldAsset::class);
 
-      Craft::$app->getView()->registerJs( "$.fn['EntriesSubset']();" );
+        Craft::$app->getView()->registerJs("$.fn['EntriesSubset']();");
 
-      $parentHtml = parent::getSettingsHtml();
+        $service = Plugin::getInstance()->getService();
 
-      $plugin = EntriesSubset::getInstance();
-
-      return $parentHtml . Craft::$app->getView()->renderTemplate( 'entriessubset/settings', [
+        return parent::getSettingsHtml() . Craft::$app->getView()->renderTemplate('entriessubset/settings', [
             'settings' => $this->getSettings(),
-            'entryTypesBySection' => $plugin->service->getEntryTypeOptions(),
-            'userGroups' => $plugin->service->getUserGroups(),
-            'users' => $plugin->service->getUsers(),
-            'type' => $this->displayName(),
-        ] );
-
-
+            'entryTypesBySection' => $service->getEntryTypeOptions(),
+            'userGroups' => $service->getUserGroups(),
+            'users' => $service->getUsers(),
+            'type' => self::displayName(),
+        ]);
     }
 
     /**
      * @inheritdoc
      */
-    protected function inputTemplateVariables( $value = null, ElementInterface $element = null ): array
+    protected function inputTemplateVariables($value = null, ElementInterface $element = null): array
     {
-      $vars = parent::inputTemplateVariables( $value, $element );
+        $vars = parent::inputTemplateVariables($value, $element);
 
-      $settings = $this->getSettings();
+        $settings = $this->getSettings();
 
-      if ( isset( $settings[ 'entryTypes' ] ) ) {
-        $entryTypes = $settings[ 'entryTypes' ];
+        if (isset($settings['entryTypes']) && is_array($settings['entryTypes']) and !empty($settings['entryTypes'])) {
+            foreach ($settings['entryTypes'] as $typeUid) {
+                $typeId = Db::idByUid(Table::ENTRYTYPES, $typeUid);
 
-        if ($entryTypes and is_array( $entryTypes ) and !empty( $entryTypes ) ) {
-          foreach( $entryTypes as $typeUid ) {
-            $typeId = Db::idByUid(Table::ENTRYTYPES, $typeUid);
+                if (is_numeric($typeId)) {
+                    $entryType = Craft::$app->sections->getEntryTypeById($typeId);
 
-            if ( is_numeric( $typeId ) ) {
-              $entryType = Craft::$app->sections->getEntryTypeById( $typeId );
-
-              // Make sure there is a valid entry type
-              if ( $entryType !== null ) {
-                $vars[ 'criteria' ][ 'type' ][] = $entryType->handle;
-              }
+                    // Make sure there is a valid entry type
+                    if ($entryType !== null) {
+                        $vars['criteria']['type'][] = $entryType->handle;
+                    }
+                }
             }
-          }
         }
-      }
 
-      if ( isset( $settings[ 'users' ] ) and count( $settings[ 'users' ] ) ) {
-        foreach ( $settings[ 'users' ] as $userId ) {
-          if ( is_numeric( $userId ) ) {
-            $vars[ 'criteria' ][ 'authorId' ][] = $userId;
-          }
+        if (isset($settings['users']) and count($settings['users'])) {
+            foreach ($settings['users'] as $userId) {
+                if (is_numeric($userId)) {
+                    $vars['criteria']['authorId'][] = $userId;
+                }
+            }
         }
-      }
 
-      if ( isset( $settings[ 'userGroups' ] ) and count( $settings[ 'userGroups' ] ) ) {
-        foreach ( $settings[ 'userGroups' ] as $userGroupId ) {
-          $vars[ 'criteria' ][ 'authorGroupId' ][] = $userGroupId;
+        if (isset($settings['userGroups']) and count($settings['userGroups'])) {
+            foreach ($settings['userGroups'] as $userGroupId) {
+                $vars['criteria']['authorGroupId'][] = $userGroupId;
+            }
         }
-      }
 
-      return $vars;
+        return $vars;
     }
 }
