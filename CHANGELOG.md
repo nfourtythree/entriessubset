@@ -1,5 +1,10 @@
 # Entries Subset Changelog
 
+## 1.2.3.1 - 2022-05-10
+
+### Fixed
+- Fixed a bug that could occur during migration. ([#15](https://github.com/nfourtythree/entriessubset/issues/15))
+
 ## 1.2.3 - 2020-10-27
 
 ### Fixed
