@@ -1,6 +1,6 @@
 # Entries Subset Changelog
 
-## Unreleased
+## 2.0.0 - 2022-05-10
 
 ### Changed
 - Entries Subset now supports Craft CMS v4. ([#18](https://github.com/nfourtythree/entriessubset/issues/18))
