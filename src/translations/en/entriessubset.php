@@ -1,6 +1,6 @@
 <?php
 /**
- * Entries Subset plugin for Craft CMS 3.x
+ * Entries Subset plugin for Craft CMS 4.x
  *
  * Craft field type plugin that extends the core Entries field type to give extra settings with ability to restrict by entry type
  *
@@ -21,7 +21,5 @@
  * @since     1.0.0
  */
 return [
-  'entries-subset' => 'Entries Subset',
-  'Entries Subset' => 'Entries Subset',
-    'Entries Subset plugin loaded' => 'Entries Subset plugin loaded',
+    'Entries Subset' => 'Entries Subset',
 ];
