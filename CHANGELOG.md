@@ -1,8 +1,13 @@
 # Entries Subset Changelog
 
-## Unreleased
+## 2.0.1.1 - 2022-09-16
 
-### 2.0.1 - 2022-09-16
+### Fixed
+- Changelog fixes.
+
+## 2.0.1 - 2022-09-16
+
+### Fixed
 - Fixed an error that could occur when applying Project Config changes. ([#22](https://github.com/nfourtythree/entriessubset/issues/22))
 
 ## 2.0.0 - 2022-05-10
