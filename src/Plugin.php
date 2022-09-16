@@ -33,6 +33,11 @@ class Plugin extends BasePlugin
     /**
      * @inheritdoc
      */
+    public string $schemaVersion = '1.1.1';
+
+    /**
+     * @inheritdoc
+     */
     public function init(): void
     {
         parent::init();
