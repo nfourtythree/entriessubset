@@ -1,6 +1,6 @@
 # Entries Subset Changelog
 
-## Unreleased
+## 2.0.1.1 - 2022-09-16
 
 ### Fixed
 - Changelog fixes.
