@@ -1,5 +1,10 @@
 # Entries Subset Changelog
 
+## 2.1.0 - 2022-09-26
+
+### Changed
+- Entries Subset now requires Craft CMS v4.2.1 or later. ([#23](https://github.com/nfourtythree/entriessubset/pull/23))
+
 ## 2.0.1.1 - 2022-09-16
 
 ### Fixed
