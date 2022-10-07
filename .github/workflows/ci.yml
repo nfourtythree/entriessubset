@@ -16,4 +16,4 @@ jobs:
     uses: craftcms/.github/.github/workflows/ci.yml@feature/params
     with:
       craft_version: '4'
-      jobs: ${{ toJson(["ecs", "phpstan"]) }}
+      jobs: '["ecs", "phpstan"]'
